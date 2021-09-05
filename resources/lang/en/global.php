@@ -34,7 +34,8 @@ return [
         'type_of_bussines' => 'type of bussines',
         'broker' => 'broker',
         'fee_based' => 'fee based',
-        'bank_list' => 'bank list'
+        'bank_list' => 'bank list',
+        'currency' => 'currency'
     ], //
     'month'                                => 'Month',
     'no'                                   => 'No',
