@@ -2,7 +2,7 @@
     <div style="font-size: 5%">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.insurance.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-user-friends"></i>
                     {{ trans('global.insurance') }}
                 </a>
@@ -25,35 +25,35 @@
                     {{ trans('global.master.title') }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="download">
-                    <a href="{{ route("admin.permissions.index") }}" class="dropdown-item {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.causeofloss.index") }}" class="dropdown-item {{ request()->is('admin/causeofloss') ? 'active' : '' }}">
                         <i class="fas fa-hourglass-start nav-icon">
 
                         </i>
                         {{ trans('global.master.cause_of_loss') }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.roles.index") }}" class="dropdown-item {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.typeofbusiness.index") }}" class="dropdown-item {{ request()->is('admin/typeofbusiness') ? 'active' : '' }}">
                         <i class="fas fa-building nav-icon">
 
                         </i>
                         {{ trans('global.master.type_of_bussines') }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.users.index") }}" class="dropdown-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.broker.index") }}" class="dropdown-item {{ request()->is('admin/broker') ? 'active' : '' }}">
                         <i class="fas fa-user nav-icon">
 
                         </i>
                         {{ trans('global.master.broker') }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.users.index") }}" class="dropdown-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.users.index") }}" class="dropdown-item {{ request()->is('admin/users') ? 'active' : '' }}">
                         <i class="fas fa-user nav-icon">
 
                         </i>
                         {{ trans('global.master.fee_based') }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.users.index") }}" class="dropdown-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                    <a href="{{ route("admin.bank.index") }}" class="dropdown-item {{ request()->is('admin/bank') ? 'active' : '' }}">
                         <i class="fas fa-user nav-icon">
 
                         </i>

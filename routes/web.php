@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');
@@ -23,7 +26,11 @@ Route::get('img/avatar/{filename}', 'ImgController@displayAvatar')->name('img.av
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-
+    Route::resource('insurance', 'InsuranceController');
+    Route::resource('causeofloss', 'CauseOfLossController');
+    Route::resource('typeofbusiness', 'TypeOfBusinessController');
+    Route::resource('broker','BrokerController');
+    Route::resource('bank', 'BankController');
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
     Route::resource('customer', 'CustomerController');
 
