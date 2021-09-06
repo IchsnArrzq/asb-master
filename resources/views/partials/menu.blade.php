@@ -59,6 +59,13 @@
                         </i>
                         {{ trans('global.master.bank_list') }}
                     </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ route("admin.currency.index") }}" class="dropdown-item {{ request()->is('admin/currency') ? 'active' : '' }}">
+                        <i class="fas fa-user nav-icon">
+
+                        </i>
+                        {{ trans('global.master.currency') }}
+                    </a>
                 </div>
             </li>
             

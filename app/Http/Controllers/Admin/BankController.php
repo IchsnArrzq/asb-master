@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Bank;
+use App\Currency;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class BankController extends Controller
     public function create()
     {
         return view('admin.bank.create', [
-            'bank' => new Bank()
+            'bank' => new Bank(),
+            'currency' => Currency::orderBy('type','asc')->get()
         ]);
     }
 
@@ -43,7 +45,7 @@ class BankController extends Controller
         $this->validate($request, [
             'bank_name' => 'required',
             'no_account' => 'required',
-            'currency' => 'required'
+            'currency_id' => 'required'
         ]);
         $form = $request->except(['_token']);
         Bank::create($form);
@@ -70,7 +72,8 @@ class BankController extends Controller
     public function edit($id)
     {
         return view('admin.bank.edit', [
-            'bank' => Bank::findOrFail($id)
+            'bank' => Bank::findOrFail($id),
+            'currency' => Currency::orderBy('type','asc')->get()
         ]);
     }
 
@@ -86,7 +89,7 @@ class BankController extends Controller
         $this->validate($request, [
             'bank_name' => 'required',
             'no_account' => 'required',
-            'currency' => 'required'
+            'currency_id' => 'required'
         ]);
         Bank::where('id', $id)->update($request->except(['_token', '_method']));
         return back()->with('success', 'Berhasil Mengupdate Data');

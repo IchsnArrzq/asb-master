@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Broker;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BrokerController extends Controller
+class FeeBasedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class BrokerController extends Controller
      */
     public function index()
     {
-        return view('admin.broker.index',[
-            'broker' => Broker::get()
-        ]);
+        //
     }
 
     /**
@@ -27,10 +24,7 @@ class BrokerController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.broker.create', [
-            'incident' => new Broker()
-        ]);
+        //
     }
 
     /**
@@ -41,16 +35,7 @@ class BrokerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama_broker' => 'required',
-            'telepon_broker' => 'required',
-            'email_broker' => 'required|email',
-            'alamat_broker' => 'required'
-        ]);
-        $form = $request->except(['_token']);
-        $form['is_active'] = 1;
-        Broker::create($form);
-        return back()->with('success', 'Berhasil Menambah Data');
+        //
     }
 
     /**
@@ -72,9 +57,7 @@ class BrokerController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.broker.edit', [
-            'broker' => Broker::findOrFail($id)
-        ]);
+        //
     }
 
     /**
@@ -86,15 +69,7 @@ class BrokerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $this->validate($request, [
-            'nama_broker' => 'required',
-            'telepon_broker' => 'required',
-            'email_broker' => 'required|email',
-            'alamat_broker' => 'required'
-        ]);
-        Broker::where('id', $id)->update($request->except(['_token','_method']));
-        return back()->with('success','Berhasil Mengupdate Data');
+        //
     }
 
     /**
@@ -105,7 +80,6 @@ class BrokerController extends Controller
      */
     public function destroy($id)
     {
-        Broker::findOrFail($id)->delete();
-        return back()->with('success', 'Berhasil Menhapus Data');
+        //
     }
 }

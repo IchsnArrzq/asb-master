@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Broker;
+use App\Currency;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BrokerController extends Controller
+class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BrokerController extends Controller
      */
     public function index()
     {
-        return view('admin.broker.index',[
-            'broker' => Broker::get()
+        return view('admin.currency.index', [
+            'currency' => Currency::get()
         ]);
     }
 
@@ -28,8 +28,8 @@ class BrokerController extends Controller
     public function create()
     {
         
-        return view('admin.broker.create', [
-            'incident' => new Broker()
+        return view('admin.currency.create', [
+            'currency' => new Currency()
         ]);
     }
 
@@ -42,15 +42,10 @@ class BrokerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_broker' => 'required',
-            'telepon_broker' => 'required',
-            'email_broker' => 'required|email',
-            'alamat_broker' => 'required'
+            'type' => 'required'
         ]);
-        $form = $request->except(['_token']);
-        $form['is_active'] = 1;
-        Broker::create($form);
-        return back()->with('success', 'Berhasil Menambah Data');
+        Currency::create($request->except(['_token']));
+        return back()->with('success', 'Berhasil Membuat Data');
     }
 
     /**
@@ -61,7 +56,7 @@ class BrokerController extends Controller
      */
     public function show($id)
     {
-        //
+        //  
     }
 
     /**
@@ -72,8 +67,8 @@ class BrokerController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.broker.edit', [
-            'broker' => Broker::findOrFail($id)
+        return view('admin.currency.edit',[
+            'currency' => Currency::findOrFail($id)
         ]);
     }
 
@@ -86,15 +81,11 @@ class BrokerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $this->validate($request, [
-            'nama_broker' => 'required',
-            'telepon_broker' => 'required',
-            'email_broker' => 'required|email',
-            'alamat_broker' => 'required'
+            'type' => 'required'
         ]);
-        Broker::where('id', $id)->update($request->except(['_token','_method']));
-        return back()->with('success','Berhasil Mengupdate Data');
+        Currency::where('id', $id)->update($request->except(['_token', '_method']));
+        return back()->with('success', 'Berhasil Mengupdate Data');
     }
 
     /**
@@ -105,7 +96,14 @@ class BrokerController extends Controller
      */
     public function destroy($id)
     {
-        Broker::findOrFail($id)->delete();
-        return back()->with('success', 'Berhasil Menhapus Data');
+        try {
+            if(count(Currency::findOrFail($id)->bank) == 0){
+                Currency::findOrFail($id)->delete();
+                return back()->with('success', 'Berhasil Menghapus Data');
+            }
+            return back()->with('error', 'gagal menghapus data');
+        } catch (\Throwable $th) {
+            return back()-with('error', $th->getMessage());
+        }
     }
 }

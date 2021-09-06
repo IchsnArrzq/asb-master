@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bank extends Model
+class Currency extends Model
 {
     protected $guarded = [];
-    public function currency()
+    public function bank()
     {
-        return $this->belongsTo(Currency::class);
+        return $this->hasMany(Bank::class);
     }
 }

@@ -35,7 +35,8 @@ return [
         'type_of_bussines' => 'jenis usaha',
         'broker' => 'makelar',
         'fee_based' => 'berbasis biaya',
-        'bank_list' => 'daftar bank'
+        'bank_list' => 'daftar bank',
+        'currency' => 'mata uang'
     ], //
     'month'                                => 'Bulan',
     'no'                                   => 'TIdak',

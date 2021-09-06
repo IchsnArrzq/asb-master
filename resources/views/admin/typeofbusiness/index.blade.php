@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>typeofbusiness List</h5>
+                    <h5>type of business List</h5>
                     <a href="{{ route('admin.typeofbusiness.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">
@@ -13,8 +13,8 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th class="text-light">Id</th>
-                                <th class="text-light">type policy</th>
-                                <th class="text-light">abbreviation</th>
+                                <th class="text-light">Type Policy</th>
+                                <th class="text-light">Abbreviation</th>
                                 <th class="text-light">Actions</th>
                             </tr>
                         </thead>
@@ -43,9 +43,9 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+@endsection
+@section('scripts')
 <script>
     $('.table').DataTable()
 </script>
-@endsection
+@stop
