@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
                 'required',
             ],
             'email'    => [
-                'required, unique:users, email_address',
+                'required',
             ],
             'password' => [
                 'required',

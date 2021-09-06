@@ -8,9 +8,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.caselist.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-money-bill-wave"></i>
-                    {{ trans('global.cash_list') }}
+                    {{ trans('global.case_list') }}
                 </a>
             </li>
             <li class="nav-item">
@@ -46,7 +46,7 @@
                         {{ trans('global.master.broker') }}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.users.index") }}" class="dropdown-item {{ request()->is('admin/users') ? 'active' : '' }}">
+                    <a href="{{ route("admin.feebased.index") }}" class="dropdown-item {{ request()->is('admin/feebased') ? 'active' : '' }}">
                         <i class="fas fa-user nav-icon">
 
                         </i>
@@ -59,18 +59,11 @@
                         </i>
                         {{ trans('global.master.bank_list') }}
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route("admin.currency.index") }}" class="dropdown-item {{ request()->is('admin/currency') ? 'active' : '' }}">
-                        <i class="fas fa-user nav-icon">
-
-                        </i>
-                        {{ trans('global.master.currency') }}
-                    </a>
                 </div>
             </li>
             
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.users.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-user-cog"></i>
                     User
                 </a>

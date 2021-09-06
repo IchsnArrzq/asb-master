@@ -15,11 +15,11 @@ class CreateFeeBasedsTable extends Migration
     {
         Schema::create('fee_baseds', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('adjusted_idr');
-            $table->bigInteger('adjusted_usd');
-            $table->bigInteger('fee_idr');
-            $table->bigInteger('fee_usd');
-            $table->unsignedBigInteger('category_fee');
+            $table->string('adjusted_idr');
+            $table->string('adjusted_usd');
+            $table->string('fee_idr');
+            $table->string('fee_usd');
+            $table->integer('category_fee');
             $table->timestamps();
         });
     }

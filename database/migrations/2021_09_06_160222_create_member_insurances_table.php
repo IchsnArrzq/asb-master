@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCurrenciesTable extends Migration
+class CreateMemberInsurancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateCurrenciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('currencies', function (Blueprint $table) {
+        Schema::create('member_insurances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type');
+            $table->unsignedBigInteger('file_no_outstanding');
+            $table->unsignedBigInteger('member_insurance');
+            $table->string('share');
+            $table->integer('is_leader')->nullable();
+            $table->string('invoice_leader');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateCurrenciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currencies');
+        Schema::dropIfExists('member_insurances');
     }
 }

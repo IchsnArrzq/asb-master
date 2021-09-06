@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('bank', 'BankController');
     Route::resource('currency', 'CurrencyController');
     Route::resource('feebased', 'FeeBasedController');
+    Route::resource('caselist', 'CaseListController');
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
     Route::resource('customer', 'CustomerController');
 

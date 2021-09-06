@@ -7,7 +7,7 @@ return [
     'areYouSure'                           => 'Anda yakin?',
     'clickHereToVerify'                    => 'Klik di sini untuk memverifikasi',
     'create'                               => 'Buat',
-    'cash_list'                            => 'Daftar Uang Tunai', //
+    'case_list'                            => 'Daftar Kasus', //
     'dashboard'                            => 'Dashboard',
     'delete'                               => 'Hapus',
     'downloadFile'                         => 'Unduh berkas',

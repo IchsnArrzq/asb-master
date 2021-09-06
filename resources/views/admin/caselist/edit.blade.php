@@ -5,14 +5,14 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <a href="{{ route('admin.currency.index') }}" class="btn btn-outline-info">Back</a>
+                    <a href="{{ route('admin.caselist.index') }}" class="btn btn-outline-info">Back</a>
 
-                    <h5>currency Edit</h5>
+                    <h5>cash List</h5>
                 </div>
-                <form action="{{ route('admin.currency.update', $currency->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.caselist.update', $caselist->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
-                    @include('admin.currency.form')
+                    @include('admin.caselist.form')
                     <button type="submit" class="btn btn-outline-success float-right">Store</button>
                 </form>
             </div>

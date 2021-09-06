@@ -23,14 +23,13 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="currency_id">currency</label>
-            <select name="currency_id" id="currency_id" class="form-control @error('currency_id') is-invalid @enderror">
-            <option value="{{ $bank->currency->id ?? '' }}">-- {{ $bank->currency->type ?? 'Kosong' }} --</option>
-            @foreach($currency as $data)
-            <option value="{{ $data->id }}">{{ $data->type }}</option>
-            @endforeach
+            <label for="currency">currency</label>
+            <select name="currency" id="currency" class="form-control @error('currency') is-invalid @enderror">
+            <option value="{{ $bank->currency }}">{{ $bank->currency }}</option>
+            <option value="RP">RP</option>
+            <option value="USD">USD</option>
             </select>
-            @error('currency_id')
+            @error('currency')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

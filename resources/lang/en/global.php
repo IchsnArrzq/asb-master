@@ -7,7 +7,7 @@ return [
     'areYouSure'                           => 'Are you sure?',
     'clickHereToVerify'                    => 'Click here to verify',
     'create'                               => 'Create',
-    'cash_list'                            => 'Cash List', //
+    'case_list'                            => 'Case List', //
     'dashboard'                            => 'Dashboard',
     'delete'                               => 'Delete',
     'downloadFile'                         => 'Download file',

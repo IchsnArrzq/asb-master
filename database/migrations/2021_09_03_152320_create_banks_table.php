@@ -17,7 +17,7 @@ class CreateBanksTable extends Migration
             $table->bigIncrements('id');
             $table->string('bank_name');
             $table->string('no_account');
-            $table->unsignedBigInteger('currency_id')->constrained('currencies');
+            $table->string('currency');
             $table->timestamps();
         });
     }

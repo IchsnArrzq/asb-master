@@ -29,8 +29,7 @@ class BankController extends Controller
     public function create()
     {
         return view('admin.bank.create', [
-            'bank' => new Bank(),
-            'currency' => Currency::orderBy('type','asc')->get()
+            'bank' => new Bank()
         ]);
     }
 
@@ -45,7 +44,7 @@ class BankController extends Controller
         $this->validate($request, [
             'bank_name' => 'required',
             'no_account' => 'required',
-            'currency_id' => 'required'
+            'currency' => 'required'
         ]);
         $form = $request->except(['_token']);
         Bank::create($form);
@@ -72,8 +71,7 @@ class BankController extends Controller
     public function edit($id)
     {
         return view('admin.bank.edit', [
-            'bank' => Bank::findOrFail($id),
-            'currency' => Currency::orderBy('type','asc')->get()
+            'bank' => Bank::findOrFail($id)
         ]);
     }
 
@@ -89,7 +87,7 @@ class BankController extends Controller
         $this->validate($request, [
             'bank_name' => 'required',
             'no_account' => 'required',
-            'currency_id' => 'required'
+            'currency' => 'required'
         ]);
         Bank::where('id', $id)->update($request->except(['_token', '_method']));
         return back()->with('success', 'Berhasil Mengupdate Data');

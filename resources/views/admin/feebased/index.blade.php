@@ -5,38 +5,38 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>currency List</h5>
-                    <a href="{{ route('admin.currency.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
+                    <h5>feebased List</h5>
+                    <a href="{{ route('admin.feebased.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
                         <thead class="bg-primary">
                             <tr>
                                 <th class="text-light">Id</th>
-                                <th class="text-light">Type</th>
-                                <th class="text-light">Bank List</th>
+                                <th class="text-light">adjusted_idr</th>
+                                <th class="text-light">adjusted_usd</th>
+                                <th class="text-light">fee_idr</th>
+                                <th class="text-light">fee_usd</th>
+                                <th class="text-light">category_fee</th>
                                 <th class="text-light">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($currency as $data)
+                            @foreach($feebased as $data)
                             <tr>
                                 <td>{{ $data->id }}</td>
-                                <td>{{ $data->type }}</td>
-                                <td>
-                                    <ul>
-                                        @foreach($data->bank as $row)
-                                        <li>{{ $row->bank_name }} - {{ $row->no_account }}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
+                                <td>{{ $data->adjusted_idr }}</th>
+                                <td>{{ $data->adjusted_usd }}</th>
+                                <td>{{ $data->fee_idr }}</th>
+                                <td>{{ $data->fee_usd }}</th>
+                                <td>{{ $data->category_fee }}</th>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('admin.currency.edit', $data->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>
-                                        <form action="{{ route('admin.currency.destroy', $data->id) }}" method="post">
+                                        <a href="{{ route('admin.feebased.edit', $data->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                        <form action="{{ route('admin.feebased.destroy', $data->id) }}" method="post">
                                             @csrf
-                                            @method('delete')    
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                         </form>
                                     </div>
                                 </td>
