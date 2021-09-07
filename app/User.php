@@ -82,4 +82,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Role::class);
     }
+    public function caselist()
+    {
+        return $this->hasMany(CaseList::class,'adjuster_id');
+    }
 }

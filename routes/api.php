@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::post('login', 'Api\UserApiController@login');
 Route::post('register', 'Api\UserApiController@register');
 Route::post('daftar', 'Api\UserApiController@daftar'); //reg khusus member
@@ -37,4 +39,13 @@ Route::group(['prefix' => 'v1', 'as' => 'admin.',  'middleware' => ['jwt.verify'
     Route::post('ro-update', 'RequestOrderApiController@updateRO');
     Route::apiResource('slider', 'SliderApiController');
     
+});
+
+Route::prefix('autocomplete')->name('autocomplete')->group(function(){
+    Route::get('insurance','AutoCompleteController@insurance');
+    Route::get('adjuster','AutoCompleteController@adjuster');
+    Route::get('broker','AutoCompleteController@broker');
+    Route::get('incident','AutoCompleteController@incident');
+    Route::get('policy','AutoCompleteController@policy');
+    Route::get('member','AutoCompleteController@member');
 });

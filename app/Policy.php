@@ -8,4 +8,8 @@ class Policy extends Model
 {
 
     protected $guarded = [];
+    public function caselist()
+    {
+        return $this->hasMany(CaseList::class);
+    }
 }

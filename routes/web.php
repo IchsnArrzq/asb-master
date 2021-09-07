@@ -31,9 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('typeofbusiness', 'TypeOfBusinessController');
     Route::resource('broker','BrokerController');
     Route::resource('bank', 'BankController');
-    Route::resource('currency', 'CurrencyController');
     Route::resource('feebased', 'FeeBasedController');
     Route::resource('caselist', 'CaseListController');
+    Route::resource('invoice', 'InvoiceController');
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
     Route::resource('customer', 'CustomerController');
 
