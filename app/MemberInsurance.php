@@ -11,4 +11,8 @@ class MemberInsurance extends Model
     {
         return $this->belongsTo(CaseList::class, 'file_no_outstanding');
     }
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'member_insurance');
+    }
 }

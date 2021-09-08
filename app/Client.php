@@ -9,6 +9,10 @@ class Client extends Model
     protected $guarded = [];
     public function caselist()
     {
-        return $this->hasMany(CaseList::class);
+        return $this->hasMany(CaseList::class, 'insurance_id');
+    }
+    public function member()
+    {
+        return $this->hasMany(MemberInsurance::class, 'member_insurance');
     }
 }

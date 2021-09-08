@@ -55,11 +55,11 @@
 		</div>
 	</div>
 	<div class="container">
-	{{-- <div class="app-body"> --}}
+		{{-- <div class="app-body"> --}}
 		{{-- <main class="main"> --}}
-			{{-- <div style="padding-top: 20px" class="container-fluid"> --}}
-				@yield('content')
-			{{-- </div> --}}
+		{{-- <div style="padding-top: 20px" class="container-fluid"> --}}
+		@yield('content')
+		{{-- </div> --}}
 		{{-- </main> --}}
 		<form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
 			{{ csrf_field() }}
@@ -102,106 +102,125 @@
 	<script src="{{ asset('js/tinymce/tinymce.js') }}"></script>
 	<script>
 		$(".spin-save").hide()
-		var app = angular.module('app',[])
+		var app = angular.module('app', [])
 		@if(session('success'))
-			let success = '{{ session('success') }}'
-			console.log(success)
-			$.notify(success, "success");
+		let success = '{{ session('
+		success ') }}'
+		console.log(success)
+		$.notify(success, "success");
 		@endif
 
 		@if(session('error'))
-			let error = '{{ session('error') }}'
-			$.notify(error, "error");
+		let error = '{{ session('
+		error ') }}'
+		$.notify(error, "error");
 		@endif
 
 		$(function() {
-			let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
-			let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
-			let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
-			let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
-			let printButtonTrans = '{{ trans('global.datatables.print') }}'
-			let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
+			let copyButtonTrans = '{{ trans('
+			global.datatables.copy ') }}'
+			let csvButtonTrans = '{{ trans('
+			global.datatables.csv ') }}'
+			let excelButtonTrans = '{{ trans('
+			global.datatables.excel ') }}'
+			let pdfButtonTrans = '{{ trans('
+			global.datatables.pdf ') }}'
+			let printButtonTrans = '{{ trans('
+			global.datatables.print ') }}'
+			let colvisButtonTrans = '{{ trans('
+			global.datatables.colvis ') }}'
 			let languages = {
 				'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
 			};
 
-			$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
+			$.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+				className: 'btn'
+			})
 			$.extend(true, $.fn.dataTable.defaults, {
 				language: {
-				url: languages.{{ app()->getLocale() }}
-			},
-			columnDefs: [{
-				orderable: false,
-				className: 'select-checkbox',
-				targets: 0
-			}, {
-				orderable: false,
-				searchable: false,
-				targets: -1
-			}],
-			select: {
-				style:    'multi+shift',
-				selector: 'td:first-child'
-			},
-			order: [],
-			scrollX: true,
-			pageLength: 25,
-			dom: 'lBfrtip<"actions">',
-			buttons: [
-			{
-				extend: 'copy',
-				className: 'btn-default',
-				text: copyButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			},
-			{
-				extend: 'csv',
-				className: 'btn-default',
-				text: csvButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			},
-			{
-				extend: 'excel',
-				className: 'btn-default',
-				text: excelButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			},
-			{
-				extend: 'pdf',
-				className: 'btn-default',
-				text: pdfButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			},
-			{
-				extend: 'print',
-				className: 'btn-default',
-				text: printButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			},
-			{
-				extend: 'colvis',
-				className: 'btn-default',
-				text: colvisButtonTrans,
-				exportOptions: {
-				columns: ':visible'
-				}
-			}
-		]
-	});
-	$.fn.dataTable.ext.classes.sPageButton = '';
-});
+					url: languages. {
+						{
+							app() - > getLocale()
+						}
+					}
+				},
+				columnDefs: [{
+					orderable: false,
+					className: 'select-checkbox',
+					targets: 0
+				}, {
+					orderable: false,
+					searchable: false,
+					targets: -1
+				}],
+				select: {
+					style: 'multi+shift',
+					selector: 'td:first-child'
+				},
+				order: [],
+				scrollX: true,
+				pageLength: 25,
+				dom: 'lBfrtip<"actions">',
+				buttons: [{
+						extend: 'copy',
+						className: 'btn-default',
+						text: copyButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					},
+					{
+						extend: 'csv',
+						className: 'btn-default',
+						text: csvButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					},
+					{
+						extend: 'excel',
+						className: 'btn-default',
+						text: excelButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					},
+					{
+						extend: 'pdf',
+						className: 'btn-default',
+						text: pdfButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					},
+					{
+						extend: 'print',
+						className: 'btn-default',
+						text: printButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					},
+					{
+						extend: 'colvis',
+						className: 'btn-default',
+						text: colvisButtonTrans,
+						exportOptions: {
+							columns: ':visible'
+						}
+					}
+				]
+			});
+			$.fn.dataTable.ext.classes.sPageButton = '';
+		});
+	</script>
 
-</script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+	<script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
 	@yield('scripts')
 </body>
+
 </html>

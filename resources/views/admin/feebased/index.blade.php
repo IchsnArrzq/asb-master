@@ -60,6 +60,22 @@
 
 @section('scripts')
 <script>
-    $('.table').DataTable()
+    $('.table').DataTable({
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [{
+                className: 'dtr-control',
+                responsivePriority: 1,
+                targets: 0
+            },
+            {
+                responsivePriority: 2,
+                targets: 1
+            }
+        ]
+    })
 </script>
 @stop

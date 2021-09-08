@@ -31,4 +31,8 @@ class CaseList extends Model
     {
         return $this->belongsTo(Policy::class, 'policy_id');
     }
+    public function expense()
+    {
+        return $this->hasOne(Expense::class, 'file_no_expense');
+    }
 }

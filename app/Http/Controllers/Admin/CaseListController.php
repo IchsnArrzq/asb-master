@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Broker;
 use App\Caselist;
 use App\Client;
+use App\Expense;
 use App\Http\Controllers\Controller;
 use App\Incident;
 use App\MemberInsurance;
@@ -63,8 +64,10 @@ class CaseListController extends Controller
             'begin' => 'required',
             'end' => 'required',
             'dol' => 'required',
-            'insured' => 'required'
+            'insured' => 'required',
+            'amount' => 'required'
         ]);
+        $amount = str_replace(',', '', $request->amount);
         try {
             DB::beginTransaction();
             $caselist = Caselist::create([
@@ -80,7 +83,13 @@ class CaseListController extends Controller
                 'leader' => $request->leader,
                 'begin' => $request->begin,
                 'end' => $request->end,
-                'dol' => $request->dol
+                'dol' => $request->dol,
+                'category' => $request->category,
+                'pr_amount' => $request->pr_amount
+            ]);
+            Expense::create([
+                'file_no_expense' => $caselist->id,
+                'amount' => $amount
             ]);
             for ($i = 1; $i <= count($request->member); $i++) {
                 MemberInsurance::create([
@@ -95,6 +104,7 @@ class CaseListController extends Controller
             return back()->with('success', 'Berhasil Membuat Data');
         } catch (Exception $th) {
             DB::rollBack();
+            dd($th->getMessage());
             return back()->with('error', $th->getMessage());
         }
     }
@@ -107,7 +117,7 @@ class CaseListController extends Controller
      */
     public function show($id)
     {
-        return view('admin.caselist.show',[
+        return view('admin.caselist.show', [
             'caselist' => Caselist::findOrFail($id)
         ]);
     }
@@ -141,10 +151,11 @@ class CaseListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $member = array_values($request->member);
             $share = array_values($request->percent);
             $status = array_values($request->status);
+            $amount = str_replace(',', '', $request->amount);
             DB::beginTransaction();
             Caselist::where('id', $id)->update([
                 'file_no' => $request->file_no,
@@ -159,9 +170,14 @@ class CaseListController extends Controller
                 'leader' => $request->leader,
                 'begin' => $request->begin,
                 'end' => $request->end,
-                'dol' => $request->dol
+                'dol' => $request->dol,
+                'category' => $request->category,
+                'pr_amount' => $request->pr_amount
             ]);
-            MemberInsurance::where('file_no_outstanding',$id)->delete();
+            Expense::where('file_no_expense', $id)->update([
+                'amount' => $amount
+            ]);
+            MemberInsurance::where('file_no_outstanding', $id)->delete();
             for ($i = 0; $i < count($request->member); $i++) {
                 MemberInsurance::create([
                     'file_no_outstanding' => $id,
@@ -172,7 +188,7 @@ class CaseListController extends Controller
                 ]);
             }
             DB::commit();
-            return back()->with('success', 'Berhasil Membuat Data');
+            return back()->with('success', 'Berhasil Mengupdate Data');
         } catch (Exception $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -190,6 +206,7 @@ class CaseListController extends Controller
         try {
             DB::beginTransaction();
             MemberInsurance::where('file_no_outstanding', $id)->delete();
+            Expense::where('file_no_expense', $id)->delete();
             Caselist::where('id', $id)->delete();
             DB::commit();
             return   back()->with('success', 'Berhasil Menghapus Data');
@@ -197,6 +214,5 @@ class CaseListController extends Controller
             DB::rollBack();
             return back()->with('error', $th->getMessage());
         }
-
     }
 }

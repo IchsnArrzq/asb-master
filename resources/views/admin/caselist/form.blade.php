@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="file_no">File No</label>
             <input name="file_no" id="file_no" type="text" value="{{ $caselist->file_no ?? '' }}" class="form-control @error('file_no') is-invalid @enderror">
@@ -10,7 +10,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="insurance">Insurance</label>
             <select name="insurance" autocomplete="on" id="insurance" class="form-control @error('insurance') is-invalid @enderror">
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="adjuster">Adjuster</label>
             <select name="adjuster" id="adjuster" class="form-control @error('adjuster') is-invalid @enderror">
@@ -42,7 +42,21 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="category">category</label>
+            <select name="category" id="category" type="text" class="form-control @error('category') is-invalid @enderror">
+                <option value="1">Marinir</option>
+                <option value="2">Non Marinir</option>
+            </select>
+            @error('category')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="form-group">
             <label for="insured">Insured</label>
             <input type="text" id="insured" value="{{ $caselist->insured }}" name="insured" class="form-control @error('insured') is-invalid @enderror">
@@ -53,7 +67,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="dol">dol</label>
             <input type="date" value="{{ $caselist->dol ?? '' }}" id="dol" name="dol" class="form-control @error('dol') is-invalid @enderror">
@@ -64,11 +78,23 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    
+    <div class="col-md-3">
         <div class="form-group">
             <label for="risk_location">risk location</label>
             <input type="text" id="risk_location" value="{{ $caselist->risk_location }}" name="risk_location" class="form-control @error('risk_location') is-invalid @enderror">
             @error('risk_location')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="pr_amount">pr amount</label>
+            <input type="text" value="{{ $caselist->pr_amount ?? '' }}" id="pr_amount" name="pr_amount" class="form-control @error('pr_amount') is-invalid @enderror">
+            @error('pr_amount')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -135,7 +161,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="leader">Leader</label>
             <input class="form-control @error('leader') is-invalid @enderror" value="{{ $caselist->leader ?? '' }}" name="leader" id="leader" type="text">
@@ -146,7 +172,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="begin">begin</label>
             <input class="form-control @error('begin') is-invalid @enderror" value="{{ $caselist->begin }}" name="begin" id="begin" type="date">
@@ -157,11 +183,22 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="end">end</label>
             <input class="form-control @error('end') is-invalid @enderror" value="{{ $caselist->end }}" name="end" id="end" type="date">
             @error('end')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="amount">amount</label>
+            <input class="form-control @error('amount') is-invalid @enderror" oninput="rupiah(this)" value="@isset($caselist->expense->amount) {{ number_format($caselist->expense->amount) }} @endisset" name="amount" id="amount" type="text">
+            @error('amount')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -221,9 +258,9 @@
                             </td>
                         </tr>
                         <script>
-                            setTimeout(function(){
+                            setTimeout(function() {
                                 $('#member_{{ $row->id }}').select2()
-                            },500)
+                            }, 500)
                         </script>
                         @endforeach
                     </tbody>
@@ -236,6 +273,33 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    const formatter = function(num) {
+        var str = num.toString().replace("", ""),
+            parts = false,
+            output = [],
+            i = 1,
+            formatted = null;
+        if (str.indexOf(".") > 0) {
+            parts = str.split(".");
+            str = parts[0];
+        }
+        str = str.split("").reverse();
+        for (var j = 0, len = str.length; j < len; j++) {
+            if (str[j] != ",") {
+                output.push(str[j]);
+                if (i % 3 == 0 && j < (len - 1)) {
+                    output.push(",");
+                }
+                i++;
+            }
+        }
+        formatted = output.reverse().join("");
+        return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+    };
+
+    function rupiah(e) {
+        e.value = formatter(e.value)
+    }
     setTimeout(function() {
         $('#incident').select2();
         $('#policy').select2();

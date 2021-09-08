@@ -12,6 +12,7 @@
                     <table class="table table-hover table-bordered">
                         <thead class="bg-primary">
                             <tr>
+                                <th class="text-light"></th>
                                 <th class="text-light">Id</th>
                                 <th class="text-light">Brand</th>
                                 <th class="text-light">Name</th>
@@ -28,6 +29,7 @@
                         <tbody>
                             @foreach($clients as $client)
                             <tr>
+                                <td></td>
                                 <td>{{ $client->id }}</td>
                                 <td>{{ $client->brand }}</td>
                                 <td>{{ $client->name }}</td>
@@ -61,6 +63,22 @@
 
 @section('scripts')
 <script>
-    $('.table').DataTable()
+    $('.table').DataTable({
+        responsive: {
+            details: {
+                type: 'column'
+            }
+        },
+        columnDefs: [{
+                className: 'dtr-control',
+                responsivePriority: 1,
+                targets: 0
+            },
+            {
+                responsivePriority: 2,
+                targets: 1
+            }
+        ]
+    })
 </script>
 @stop

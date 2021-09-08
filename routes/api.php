@@ -49,3 +49,5 @@ Route::prefix('autocomplete')->name('autocomplete')->group(function(){
     Route::get('policy','AutoCompleteController@policy');
     Route::get('member','AutoCompleteController@member');
 });
+
+Route::get('caselist/{id}', 'Api\AjaxController@caselist');

@@ -21,6 +21,8 @@ class CreateCaseListsTable extends Migration
             $table->unsignedBigInteger('broker_id');
             $table->unsignedBigInteger('incident_id');
             $table->unsignedBigInteger('policy_id');
+            $table->integer('category');
+            $table->integer('pr_amount');
             $table->string('insured');
             $table->string('risk_location');
             $table->string('currency');
