@@ -227,14 +227,25 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    setTimeout(function() {
+        $('#incident').select2();
+        $('#policy').select2();
+        $('#broker').select2();
+        $('#adjuster').select2();
+        $('#insurance').select2();
+    }, 1000)
+
     function form_dinamic() {
         let index = $('#dynamic_form tr').length + 1
         let template = `
             <tr>
                 <td>
                     <div class="form-group">
-                        <select name="member[${index}]" id="" class="form-control">
+                        <select name="member[${index}]" id="member_${index}" class="form-control">
                                 @foreach($client as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
@@ -266,6 +277,9 @@
     `
         $('#dynamic_form').append(template)
 
+        setTimeout(function() {
+            $(`#member_${index}`).select2();
+        }, 500)
     }
 
     function LetMeHereToCount(qr) {

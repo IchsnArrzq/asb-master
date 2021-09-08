@@ -5,7 +5,18 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                {{ $caselist }}
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

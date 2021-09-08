@@ -8,7 +8,14 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Id</th>
+                                <th>insurance</th>
+                                <th>Case</th>
+                                <th>No Inovice</th>
+                                <th>Tanggal Inovice</th>
+                                <th>Tanggak Jatuh Invoice</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -36,7 +36,6 @@ class CaseListController extends Controller
      */
     public function create()
     {
-        
         return view('admin.caselist.create', [
             'caselist' => new Caselist(),
             'client' => Client::get(),
