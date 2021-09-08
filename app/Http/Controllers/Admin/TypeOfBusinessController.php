@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Policy;
+use Exception;
 use Illuminate\Http\Request;
 
 class TypeOfBusinessController extends Controller
@@ -44,10 +45,14 @@ class TypeOfBusinessController extends Controller
             'type_policy' => 'required',
             'abbreviation' => 'required'
         ]);
-        $attr = $request->except(['_token']);
-        $attr['is_active'] = 1;
-        Policy::create($attr);
-        return back()->with('success', 'Berhasil Menambah Data');
+        try {
+            $attr = $request->except(['_token']);
+            $attr['is_active'] = 1;
+            Policy::create($attr);
+            return back()->with('success', 'Berhasil Menambah Data');
+        } catch (Exception $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -87,8 +92,12 @@ class TypeOfBusinessController extends Controller
             'type_policy' => 'required',
             'abbreviation' => 'required'
         ]);
-        Policy::where('id', $id)->update($request->except(['_token','_method']));
-        return back()->with('success', 'Berhasil Menambah Data');
+        try {
+            Policy::where('id', $id)->update($request->except(['_token','_method']));
+            return back()->with('success', 'Berhasil Menambah Data');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**

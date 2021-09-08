@@ -9,24 +9,24 @@
                     <a href="{{ route('admin.caselist.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">
-                    <table id="table" class="table responsive nowrap">
-                        <thead>
+                    <table id="table" class="table table-striped nowrap">
+                        <thead class="bg-primary">
                             <tr>
-                                <th>Id</th>
-                                <th>file no</th>
-                                <th>insurance</th>
-                                <th>adjuster</th>
-                                <th>broker</th>
-                                <th>incident</th>
-                                <th>policy</th>
-                                <th>insured</th>
-                                <th>risk_location</th>
-                                <th>currency</th>
-                                <th>leader</th>
-                                <th>begin</th>
-                                <th>end</th>
-                                <th>dol</th>
-                                <th>Actions</th>
+                                <th class="text-light">Id</th>
+                                <th class="text-light">file no</th>
+                                <th class="text-light">insurance</th>
+                                <th class="text-light">adjuster</th>
+                                <th class="text-light">broker</th>
+                                <th class="text-light">incident</th>
+                                <th class="text-light">policy</th>
+                                <th class="text-light">insured</th>
+                                <th class="text-light">risk_location</th>
+                                <th class="text-light">currency</th>
+                                <th class="text-light">leader</th>
+                                <th class="text-light">begin</th>
+                                <th class="text-light">end</th>
+                                <th class="text-light">dol</th>
+                                <th class="text-light">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

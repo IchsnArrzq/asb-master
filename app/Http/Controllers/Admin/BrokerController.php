@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Broker;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 
 class BrokerController extends Controller
@@ -47,10 +48,14 @@ class BrokerController extends Controller
             'email_broker' => 'required|email',
             'alamat_broker' => 'required'
         ]);
-        $form = $request->except(['_token']);
-        $form['is_active'] = 1;
-        Broker::create($form);
-        return back()->with('success', 'Berhasil Menambah Data');
+        try {
+            $form = $request->except(['_token']);
+            $form['is_active'] = 1;
+            Broker::create($form);
+            return back()->with('success', 'Berhasil Menambah Data');
+        } catch (Exception $th) {
+            return back()->with('error',$th->getMessage());
+        }
     }
 
     /**
@@ -93,8 +98,12 @@ class BrokerController extends Controller
             'email_broker' => 'required|email',
             'alamat_broker' => 'required'
         ]);
-        Broker::where('id', $id)->update($request->except(['_token','_method']));
-        return back()->with('success','Berhasil Mengupdate Data');
+        try {
+            Broker::where('id', $id)->update($request->except(['_token','_method']));
+            return back()->with('success','Berhasil Mengupdate Data');
+        } catch (Exception $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**

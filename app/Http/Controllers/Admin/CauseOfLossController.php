@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Incident;
+use Exception;
 use Illuminate\Http\Request;
 
 class CauseOfLossController extends Controller
@@ -44,10 +45,14 @@ class CauseOfLossController extends Controller
             'type_incident' => 'required',
             'description' => 'required'
         ]);
-        $form = $request->except(['_token']);
-        $form['is_active'] = 1;
-        Incident::create($form);
-        return back()->with('success', 'Berhasil Menambah Data');
+        try{
+            $form = $request->except(['_token']);
+            $form['is_active'] = 1;
+            Incident::create($form);
+            return back()->with('success', 'Berhasil Menambah Data');
+        }catch(Exception $err){
+            return back()->with('error', $err->getMessage());
+        }
     }
 
     /**
@@ -87,8 +92,12 @@ class CauseOfLossController extends Controller
             'type_incident' => 'required',
             'description' => 'required'
         ]);
-        Incident::where('id', $id)->update($request->except(['_token','_method']));
-        return back()->with('Berhasil Mengupdate Data');
+        try {
+            Incident::where('id', $id)->update($request->except(['_token','_method']));
+            return back()->with('success', 'Berhasil Mengupdate Data');
+        } catch (Exception $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
     /**

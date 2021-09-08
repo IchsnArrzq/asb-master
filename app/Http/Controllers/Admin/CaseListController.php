@@ -141,10 +141,10 @@ class CaseListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $member = array_values($request->member);
-        $share = array_values($request->percent);
-        $status = array_values($request->status);
         try{
+            $member = array_values($request->member);
+            $share = array_values($request->percent);
+            $status = array_values($request->status);
             DB::beginTransaction();
             Caselist::where('id', $id)->update([
                 'file_no' => $request->file_no,

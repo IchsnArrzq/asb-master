@@ -13,11 +13,11 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th class="text-light">Id</th>
-                                <th class="text-light">adjusted_idr</th>
-                                <th class="text-light">adjusted_usd</th>
-                                <th class="text-light">fee_idr</th>
-                                <th class="text-light">fee_usd</th>
-                                <th class="text-light">category_fee</th>
+                                <th class="text-light">adjusted idr</th>
+                                <th class="text-light">adjusted usd</th>
+                                <th class="text-light">fee idr</th>
+                                <th class="text-light">fee usd</th>
+                                <th class="text-light">category fee</th>
                                 <th class="text-light">Actions</th>
                             </tr>
                         </thead>
@@ -25,11 +25,18 @@
                             @foreach($feebased as $data)
                             <tr>
                                 <td>{{ $data->id }}</td>
-                                <td>{{ $data->adjusted_idr }}</th>
-                                <td>{{ $data->adjusted_usd }}</th>
-                                <td>{{ $data->fee_idr }}</th>
-                                <td>{{ $data->fee_usd }}</th>
-                                <td>{{ $data->category_fee }}</th>
+                                <td class="text-right">Rp.{{ number_format($data->adjusted_idr) }}</td>
+                                <td class="text-right">${{ number_format($data->adjusted_usd) }}</td>
+                                <td class="text-right">Rp.{{ number_format($data->fee_idr) }}</td>
+                                <td class="text-right">${{ number_format($data->fee_usd) }}</td>
+                                <td class="text-center">
+                                    
+                                    @if($data->category_fee == 1)
+                                        <span class="badge badge-primary">Marinir - {{ $data->category_fee }}</span>
+                                    @else
+                                        <span class="badge badge-success">Non Marinir - {{ $data->category_fee }}</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('admin.feebased.edit', $data->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>

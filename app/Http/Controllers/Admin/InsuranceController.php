@@ -102,6 +102,17 @@ class InsuranceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'brand' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'no_telp' => 'required',
+            'no_hp' => 'required',
+            'email' => 'required|email',
+            'status' => 'required',
+            'ppn' => 'required',
+            'type' => 'required',
+        ]);
         try {
             if ($request->picture) {
                 $attr = $request->except(['_token', '_method']);
