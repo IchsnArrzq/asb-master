@@ -172,7 +172,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <label for="">LEADER / MEMBER <span id="total" name="total" class="badge badge-primary">{{ $caselist->member->sum('share') }}</span><strong>%</strong> </label>
+            <label for="">LEADER / MEMBER <span id="total" name="total" class="badge badge-primary">{{ $caselist->member->sum('share') }}</span><strong>%</strong></label>
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -191,7 +191,7 @@
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <select name="member[{{ $row->id }}]" id="" class="form-control">
+                                    <select name="member[{{ $row->id }}]" id="member_{{ $row->id }}" class="form-control">
                                         @foreach($client as $data)
                                         <option @if($data->id == $row->member_insurance) selected @endif value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
@@ -220,6 +220,11 @@
                                 </div>
                             </td>
                         </tr>
+                        <script>
+                            setTimeout(function(){
+                                $('#member_{{ $row->id }}').select2()
+                            },500)
+                        </script>
                         @endforeach
                     </tbody>
                 </table>
