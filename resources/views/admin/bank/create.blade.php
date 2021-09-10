@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
                     <a href="{{ route('admin.bank.index') }}" class="btn btn-outline-info">Back</a>
-                    <h5>cause of loss List</h5>
+                    <h5>Bank Form Create</h5>
                 </div>
                 <form action="{{ route('admin.bank.store') }}" method="post" enctype="multipart/form-data">
                     @csrf

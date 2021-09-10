@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>type of business List</h5>
+                    <h5>Type of Business List</h5>
                     <a href="{{ route('admin.typeofbusiness.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">

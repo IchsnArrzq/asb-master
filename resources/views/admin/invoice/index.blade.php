@@ -4,23 +4,24 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-end p-2">
+                <div class="d-flex justify-content-between p-2">
+                    <h5>Invoice Member List</h5>
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">
                         Invoice
                     </button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table" id="table">
-                        <thead>
+                    <table class="table table-bordered" id="table">
+                        <thead class="bg-primary">
                             <tr>
-                                <th>Id</th>
-                                <th>insurance</th>
-                                <th>Case</th>
-                                <th>No Inovice</th>
-                                <th>Tanggal Inovice</th>
-                                <th>Tanggak Jatuh Invoice</th>
-                                <th>Amount</th>
-                                <th>Status</th>
+                                <th class="text-light">Id</th>
+                                <th class="text-light">Insurance</th>
+                                <th class="text-light">Case</th>
+                                <th class="text-light">No Inovice</th>
+                                <th class="text-light">Tanggal Inovice</th>
+                                <th class="text-light">Tanggak Jatuh Invoice</th>
+                                <th class="text-light">Amount</th>
+                                <th class="text-light">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +49,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Detail Inovice</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,6 +61,7 @@
                             <div class="form-group">
                                 <label for="no_case">No Case</label>
                                 <select name="" id="no_case" onchange="OnSelect(this)" class="form-control">
+                                    <option value=""></option>
                                     @foreach($caselist as $data)
                                     <option value="{{ $data->id }}">{{ $data->file_no }}</option>
                                     @endforeach
@@ -76,36 +78,40 @@
                             <div class="form-group">
                                 <label for="adjusted">Adjusted</label>
                                 <input type="text" id="adjusted" class="form-control" readonly>
+                                <span class="badge badge-success" id="ForAdjusted"></span>
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="fee_based">Fee Based</label>
                                 <input type="text" id="fee_based" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Expense</label>
                                 <input type="text" id="expense" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Total Share Percent</label>
+                                <label for="">PPN</label>
                                 <input type="text" id="share" class="form-control" readonly>
+                                <span class="badge badge-primary" id="ForPercent"></span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Total</label>
                                 <input type="text" id="total" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table table-bordered">
@@ -178,41 +184,45 @@
             $('#expense').val(formatter(data.caselist.expense.amount))
             // $('#share').val(formatter(parseInt(data.sum.fee) + parseInt(data.caselist.expense.amount)))
             let sub_total = parseInt(data.sum.claim_amount) + parseInt(data.sum.fee) + parseInt(data.caselist.expense.amount)
-            let persen = parseInt(sub_total) * 10 / 100
+            let persen = parseInt(sub_total) * parseInt(data.caselist.insurance.ppn) / 100
+            $('#ForPercent').html(`${data.caselist.insurance.name} - ${data.caselist.insurance.ppn}%`)
+            $('#ForAdjusted').html(`${data.caselist.currency}`)
             $('#share').val(formatter(persen))
             let total = parseInt(sub_total) + parseInt(persen)
             $('#total').val(formatter(total))
             $('#forLoop').html('')
 
-            $.each(data.caselist.member, function(){
-                $('#forLoop').append("<tr>"+
-                "<td id="+this.member_insurance+"_dom>"+TheAjaxFunc(this.member_insurance)+"</td>"+
-                "<td>"+this.share+"</td>"+
-                "<td>"+formatter(total * parseInt(this.share) / 100)+"</td>"
-                +"</tr>")
+
+            $.each(data.caselist.member, function() {
+                $('#forLoop').append("<tr>" +
+                    "<td id=" + this.member_insurance + "_dom>" + TheAjaxFunc(this.member_insurance) + "</td>" +
+                    "<td>" + this.share + "</td>" +
+                    "<td>" + formatter(total * parseInt(this.share) / 100) + "</td>" +
+                    "</tr>")
             })
         } catch (err) {
             console.log(err)
         }
     }
-    function FindTheInsurance(id)
-    {
+
+    function FindTheInsurance(id) {
         return fetch(`/api/insurance/${id}`)
-                .then(data => {
-                    if(!data.ok){
-                        throw data.statusText
-                    }
-                    return data.json()
-                })
+            .then(data => {
+                if (!data.ok) {
+                    throw data.statusText
+                }
+                return data.json()
+            })
     }
-    async function TheAjaxFunc(id)
-    {
+    async function TheAjaxFunc(id) {
         let response = await FindTheInsurance(id)
         $(`#${id}_dom`).html(response.name)
     }
     $(document).ready(function() {
         setTimeout(function() {
-            $('#no_case').select2()
+            $('#no_case').select2({
+                placeholder: 'Select a Case'
+            })
         }, 500)
     })
     $('#table').DataTable({

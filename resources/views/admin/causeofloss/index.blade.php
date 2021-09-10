@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>cause of loss List</h5>
+                    <h5>Cause of Loss List</h5>
                     <a href="{{ route('admin.causeofloss.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">

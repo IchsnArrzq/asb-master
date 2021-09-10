@@ -40,15 +40,18 @@ class FeeBasedController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
+        $attr = $this->validate($request, [
             'adjusted_idr' => 'required',
             'adjusted_usd' => 'required',
             'fee_idr' => 'required',
             'fee_usd' => 'required',
             'category_fee' => 'required'
         ]);
-        FeeBased::create($request->except(['_token']));
+        $attr['adjusted_idr'] = str_replace(',', '', $request->adjusted_idr);
+        $attr['adjusted_usd'] = str_replace(',', '', $request->adjusted_usd);
+        $attr['fee_idr'] = str_replace(',', '', $request->fee_idr);
+        $attr['fee_usd'] = str_replace(',', '', $request->fee_usd);
+        FeeBased::create($attr);
         return back()->with('success', "Berhasil Membuat Data");
     }
 
@@ -86,14 +89,18 @@ class FeeBasedController extends Controller
     public function update(Request $request, $id)
     {
         
-        $this->validate($request, [
+        $attr = $this->validate($request, [
             'adjusted_idr' => 'required',
             'adjusted_usd' => 'required',
             'fee_idr' => 'required',
             'fee_usd' => 'required',
             'category_fee' => 'required'
         ]);
-        FeeBased::where('id',$id)->update($request->except(['_token','_method']));
+        $attr['adjusted_idr'] = str_replace(',', '', $request->adjusted_idr);
+        $attr['adjusted_usd'] = str_replace(',', '', $request->adjusted_usd);
+        $attr['fee_idr'] = str_replace(',', '', $request->fee_idr);
+        $attr['fee_usd'] = str_replace(',', '', $request->fee_usd);
+        FeeBased::where('id',$id)->update($attr);
         return back()->with('success', "Berhasil Mengupdate Data");
     }
 

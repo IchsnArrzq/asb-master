@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>case List</h5>
+                    <h5>Case List</h5>
                     <a href="{{ route('admin.caselist.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">

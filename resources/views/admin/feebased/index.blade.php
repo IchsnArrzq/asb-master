@@ -5,7 +5,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
-                    <h5>feebased List</h5>
+                    <h5>Fee Based List</h5>
                     <a href="{{ route('admin.feebased.create') }}" class="btn btn-outline-primary btn-sm">Create</a>
                 </div>
                 <div class="table-responsive">
@@ -13,11 +13,11 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th class="text-light">Id</th>
-                                <th class="text-light">adjusted idr</th>
-                                <th class="text-light">adjusted usd</th>
-                                <th class="text-light">fee idr</th>
-                                <th class="text-light">fee usd</th>
-                                <th class="text-light">category fee</th>
+                                <th class="text-light">Adjusted IDR</th>
+                                <th class="text-light">Adjusted USD</th>
+                                <th class="text-light">Fee IDR</th>
+                                <th class="text-light">Fee USD</th>
+                                <th class="text-light">Category Fee</th>
                                 <th class="text-light">Actions</th>
                             </tr>
                         </thead>
@@ -32,9 +32,9 @@
                                 <td class="text-center">
                                     
                                     @if($data->category_fee == 1)
-                                        <span class="badge badge-primary">Marinir - {{ $data->category_fee }}</span>
+                                        <span class="badge badge-primary">Marine - {{ $data->category_fee }}</span>
                                     @else
-                                        <span class="badge badge-success">Non Marinir - {{ $data->category_fee }}</span>
+                                        <span class="badge badge-success">Non Marine - {{ $data->category_fee }}</span>
                                     @endif
                                 </td>
                                 <td>

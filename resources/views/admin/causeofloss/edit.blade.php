@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-between p-2">
                     <a href="{{ route('admin.causeofloss.index') }}" class="btn btn-outline-info">Back</a>
 
-                    <h5>causeofloss List</h5>
+                    <h5>Cause of Loss Form Edit</h5>
                 </div>
                 <form action="{{ route('admin.causeofloss.update', $incident->id) }}" method="post" enctype="multipart/form-data">
                     @csrf

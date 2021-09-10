@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="brand">Brand</label>
             <input name="brand" id="brand" type="text" value="{{ $client->brand ?? '' }}" class="form-control @error('brand') is-invalid @enderror">
@@ -10,10 +10,10 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="name">Nama</label>
-            <input name="name" id="name" type="text" value="{{ $client->name ?? '' }}" class="form-control @error('name') is-invalid @enderror">
+            <textarea name="name" id="name" type="text" class="form-control @error('name') is-invalid @enderror">{{ $client->name ?? '' }}</textarea>
             @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -21,11 +21,11 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
 
         <div class="form-group">
             <label for="address">Alamat</label>
-            <input name="address" id="address" type="text" value="{{ $client->address ?? '' }}" class="form-control @error('address') is-invalid @enderror">
+            <textarea name="address" id="address" type="text" class="form-control @error('address') is-invalid @enderror">{{ $client->address ?? '' }}</textarea>
             @error('address')
             <div class="invalid-feedback">
                 {{ $message }}

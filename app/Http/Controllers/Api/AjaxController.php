@@ -19,6 +19,7 @@ class AjaxController extends Controller
     {
         try {
             $caselist = CaseList::find($id);
+            
             if ($caselist->category == 1) {
                 $feebased = FeeBased::where('category_fee', 1)->get();
                 if ($caselist->currency == 'RP') {
@@ -32,13 +33,14 @@ class AjaxController extends Controller
                             break;
                         }
                     }
-                } else {
+                } 
+                if($caselist->currency == 'USD') {
                     foreach ($feebased as $data) {
                         if ($caselist->claim_amount <= $data->adjusted_idr) {
                             $array = [
-                                'adjusted' => $data->adjusted_idr,
+                                'adjusted' => $data->adjusted_usd,
                                 'claim_amount' => $caselist->claim_amount,
-                                'fee' => $data->fee_idr
+                                'fee' => $data->fee_usd
                             ];
                             break;
                         }
@@ -58,13 +60,14 @@ class AjaxController extends Controller
                             break;
                         }
                     }
-                } else {
+                } 
+                if($caselist->currency == 'USD') {
                     foreach ($feebased as $data) {
                         if ($caselist->claim_amount <= $data->adjusted_idr) {
                             $array = [
-                                'adjusted' => $data->adjusted_idr,
+                                'adjusted' => $data->adjusted_usd,
                                 'claim_amount' => $caselist->claim_amount,
-                                'fee' => $data->fee_idr
+                                'fee' => $data->fee_usd
                             ];
                             break;
                         }
@@ -72,7 +75,7 @@ class AjaxController extends Controller
                 }
             }
             $response = [
-                'caselist' => CaseList::with('member', 'expense')->where('id', $id)->firstOrFail(),
+                'caselist' => CaseList::with('member', 'expense', 'insurance')->where('id', $id)->firstOrFail(),
                 'sum' => $array
             ];
 

@@ -13,9 +13,9 @@
                         <thead class="bg-primary">
                             <tr>
                                 <th class="text-light">Id</th>
-                                <th class="text-light">bank name</th>
-                                <th class="text-light">no account</th>
-                                <th class="text-light">currency</th>
+                                <th class="text-light">Bank Name</th>
+                                <th class="text-light">No Account</th>
+                                <th class="text-light">Currency</th>
                                 <th class="text-light">Actions</th>
                             </tr>
                         </thead>

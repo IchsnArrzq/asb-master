@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-between p-2">
                     <a href="{{ route('admin.feebased.index') }}" class="btn btn-outline-info">Back</a>
 
-                    <h5>feebased List</h5>
+                    <h5>Fee Based Form Edit</h5>
                 </div>
                 <form action="{{ route('admin.feebased.update', $feebased->id) }}" method="post" enctype="multipart/form-data">
                     @csrf

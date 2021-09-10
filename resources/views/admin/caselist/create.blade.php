@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
                     <a href="{{ route('admin.caselist.index') }}" class="btn btn-outline-info">Back</a>
-                    <h5>case list List</h5>
+                    <h5>Case List Form Create</h5>
                 </div>
                 <form action="{{ route('admin.caselist.store') }}" method="post" enctype="multipart/form-data">
                     @csrf

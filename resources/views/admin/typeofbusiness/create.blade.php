@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between p-2">
                     <a href="{{ route('admin.typeofbusiness.index') }}" class="btn btn-outline-info">Back</a>
-                    <h5>type of business List</h5>
+                    <h5>Type of Business Form Create</h5>
                 </div>
                 <form action="{{ route('admin.typeofbusiness.store') }}" method="post" enctype="multipart/form-data">
                     @csrf

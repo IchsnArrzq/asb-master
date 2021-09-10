@@ -12,7 +12,7 @@
                     <table class="table table-hover table-bordered">
                         <thead class="bg-primary">
                             <tr>
-                                <th class="text-light"></th>
+                                <th class="text-light">More</th>
                                 <th class="text-light">Id</th>
                                 <th class="text-light">Brand</th>
                                 <th class="text-light">Name</th>

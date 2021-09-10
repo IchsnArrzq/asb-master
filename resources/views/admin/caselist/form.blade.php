@@ -46,8 +46,8 @@
         <div class="form-group">
             <label for="category">category</label>
             <select name="category" id="category" type="text" class="form-control @error('category') is-invalid @enderror">
-                <option value="1">Marinir</option>
-                <option value="2">Non Marinir</option>
+                <option value="1">Marine</option>
+                <option value="2">Non Marine</option>
             </select>
             @error('category')
             <div class="invalid-feedback">
@@ -121,7 +121,7 @@
             <label for="broker">Broker</label>
             <select class="form-control @error('broker') is-invalid @enderror" name="broker" id="broker">
                 @foreach($broker as $data)
-                <option @if($data->id == $caselist->broker_id) selected @endif value="{{ $data->id }}">{{ $data->nama_broker }}</option>
+                <option @if($data->id == $caselist->broker_id) selected @endif value="{{ $data->id }}">{{ $data->nama_broker }} - {{ $data->alamat_broker }}</option>
                 @endforeach
             </select>
             @error('broker')
@@ -359,12 +359,14 @@
             let ele = coll[i]
             total += parseInt(ele.value)
         }
-        if (total > 100) {
+        if (total > 100 || total < 100) {
             $('#submit_case_list').addClass('disabled')
+            $('#submit_case_list').attr('disabled',true)
             $('#add').addClass('disabled')
             $('#total').html('Lebih')
         } else {
             $('#submit_case_list').removeClass('disabled')
+            $('#submit_case_list').removeAttr('disabled')
             $('#add').removeClass('disabled')
             $('#total').html(total)
         }
