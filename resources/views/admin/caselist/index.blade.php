@@ -49,7 +49,7 @@
                                 <td>{{ $data->begin }}</td>
                                 <td>{{ $data->end }}</td>
                                 <td>{{ $data->dol }}</td>
-                                <td>{{ $data->pr_amount }}</td>
+                                <td>{{ $data->claim_amount }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('admin.caselist.edit', $data->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>

@@ -92,9 +92,9 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label for="pr_amount">pr amount</label>
-            <input type="text" value="{{ $caselist->pr_amount ?? '' }}" id="pr_amount" name="pr_amount" class="form-control @error('pr_amount') is-invalid @enderror">
-            @error('pr_amount')
+            <label for="claim_amount">claim_amount</label>
+            <input type="text" value="@isset($caselist->claim_amount) {{ number_format($caselist->claim_amount) }} @endisset" oninput="rupiah(this)" id="claim_amount" name="claim_amount" class="form-control @error('claim_amount') is-invalid @enderror">
+            @error('claim_amount')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="table">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -30,10 +30,10 @@
                                 <td>{{ $data->client->name }} - {{ $data->client->brand }}</td>
                                 <td>{{ $data->caselist->insured }}</td>
                                 <td>{{ $data->caselist->file_no }}</td>
-                                <td></td>
-                                <td>Tanggak Jatuh Invoice</td>
+                                <td>{{ $data->caselist->dol }}</td>
+                                <td>{{ $data->caselist->end }}</td>
                                 <td>{{ $data->share }}</td>
-                                <td>Status</td>
+                                <td>{{ $data->is_leader}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -68,8 +68,14 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="pr_amount">Pr Amount</label>
-                                <input type="text" id="pr_amount" class="form-control" readonly>
+                                <label for="claim_amount">Claim Amount</label>
+                                <input type="text" id="claim_amount" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="adjusted">Adjusted</label>
+                                <input type="text" id="adjusted" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -84,30 +90,37 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Expense</label>
-                                <input type="text" id="expense" class="form-control">
+                                <input type="text" id="expense" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Total Share Percent</label>
-                                <input type="text" id="share" class="form-control">
+                                <input type="text" id="share" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Total</label>
-                                <input type="text" id="total" class="form-control">
+                                <input type="text" id="total" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table>
-
-                                </table>
-                            </div>
+                            <table class="table table-bordered">
+                                <thead class="bg-primary text-light">
+                                    <tr>
+                                        <th>Member</th>
+                                        <th>Member Share</th>
+                                        <th>Nominal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="forLoop">
+                                </tbody>
+                            </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -159,18 +172,50 @@
         try {
             let data = await GetResource($(q).val())
             console.log(data)
-            $('#pr_amount').val(formatter(data.pr_amount))
-            $('#expense').val(formatter(data.expense.amount))
+            $('#claim_amount').val(formatter(data.sum.claim_amount))
+            $('#adjusted').val(formatter(data.sum.adjusted))
+            $('#fee_based').val(formatter(data.sum.fee))
+            $('#expense').val(formatter(data.caselist.expense.amount))
+            // $('#share').val(formatter(parseInt(data.sum.fee) + parseInt(data.caselist.expense.amount)))
+            let sub_total = parseInt(data.sum.claim_amount) + parseInt(data.sum.fee) + parseInt(data.caselist.expense.amount)
+            let persen = parseInt(sub_total) * 10 / 100
+            $('#share').val(formatter(persen))
+            let total = parseInt(sub_total) + parseInt(persen)
+            $('#total').val(formatter(total))
+            $('#forLoop').html('')
+
+            $.each(data.caselist.member, function(){
+                $('#forLoop').append("<tr>"+
+                "<td id="+this.member_insurance+"_dom>"+TheAjaxFunc(this.member_insurance)+"</td>"+
+                "<td>"+this.share+"</td>"+
+                "<td>"+formatter(total * parseInt(this.share) / 100)+"</td>"
+                +"</tr>")
+            })
         } catch (err) {
             console.log(err)
         }
+    }
+    function FindTheInsurance(id)
+    {
+        return fetch(`/api/insurance/${id}`)
+                .then(data => {
+                    if(!data.ok){
+                        throw data.statusText
+                    }
+                    return data.json()
+                })
+    }
+    async function TheAjaxFunc(id)
+    {
+        let response = await FindTheInsurance(id)
+        $(`#${id}_dom`).html(response.name)
     }
     $(document).ready(function() {
         setTimeout(function() {
             $('#no_case').select2()
         }, 500)
     })
-    $('.table').DataTable({
+    $('#table').DataTable({
         responsive: {
             details: {
                 type: 'column'
