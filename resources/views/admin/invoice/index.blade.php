@@ -19,7 +19,7 @@
                                 <th class="text-light">Case</th>
                                 <th class="text-light">No Inovice</th>
                                 <th class="text-light">Tanggal Inovice</th>
-                                <th class="text-light">Tanggak Jatuh Invoice</th>
+                                <th class="text-light">Tanggal Jatuh Invoice</th>
                                 <th class="text-light">Amount</th>
                                 <th class="text-light">Status</th>
                             </tr>

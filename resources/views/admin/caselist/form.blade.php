@@ -2,7 +2,13 @@
     <div class="col-md-3">
         <div class="form-group">
             <label for="file_no">File No</label>
-            <input name="file_no" id="file_no" type="text" value="{{ $caselist->file_no ?? '' }}" class="form-control @error('file_no') is-invalid @enderror">
+            <!-- <input name="file_no" id="file_no" type="text" value="{{ $caselist->file_no ?? '' }}" class="form-control @error('file_no') is-invalid @enderror"> -->
+            
+            <select name="file_no" id="file_no" type="text" class="form-control @error('file_no') is-invalid @enderror">
+                @foreach($file_no as $data)
+                <option @if($caselist->file_no == $data) selected @endif value="{{ $data }}">{{ $data }}</option>
+                @endforeach
+            </select>
             @error('file_no')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -78,7 +84,7 @@
             @enderror
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="form-group">
             <label for="risk_location">risk location</label>
@@ -306,6 +312,9 @@
         $('#broker').select2();
         $('#adjuster').select2();
         $('#insurance').select2();
+        $('#file_no').select2({
+            tags: true
+        })
     }, 1000)
 
     function form_dinamic() {
@@ -361,7 +370,7 @@
         }
         if (total > 100 || total < 100) {
             $('#submit_case_list').addClass('disabled')
-            $('#submit_case_list').attr('disabled',true)
+            $('#submit_case_list').attr('disabled', true)
             $('#add').addClass('disabled')
             $('#total').html('Lebih')
         } else {
