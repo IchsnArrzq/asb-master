@@ -66,11 +66,11 @@ class CaseListController extends Controller
             'end' => 'required',
             'dol' => 'required',
             'insured' => 'required',
-            'amount' => 'required',
-            'claim_amount' => 'required'
+            // 'amount' => 'required',
+            // 'claim_amount' => 'required'
         ]);
-        $amount = str_replace(',', '', $request->amount);
-        $claim_amount = str_replace(',', '', $request->claim_amount);
+        // $amount = str_replace(',', '', $request->amount);
+        // $claim_amount = str_replace(',', '', $request->claim_amount);
         try {
             DB::beginTransaction();
             $caselist = Caselist::create([
@@ -88,11 +88,11 @@ class CaseListController extends Controller
                 'end' => $request->end,
                 'dol' => $request->dol,
                 'category' => $request->category,
-                'claim_amount' => $claim_amount
+                // 'claim_amount' => $claim_amount
             ]);
             Expense::create([
                 'file_no_expense' => $caselist->id,
-                'amount' => $amount
+                // 'amount' => $amount
             ]);
             for ($i = 1; $i <= count($request->member); $i++) {
                 MemberInsurance::create([
@@ -159,8 +159,8 @@ class CaseListController extends Controller
             $member = array_values($request->member);
             $share = array_values($request->percent);
             $status = array_values($request->status);
-            $amount = str_replace(',', '', $request->amount);
-            $claim_amount = str_replace(',', '', $request->claim_amount);
+            // $amount = str_replace(',', '', $request->amount);
+            // $claim_amount = str_replace(',', '', $request->claim_amount);
             DB::beginTransaction();
             Caselist::where('id', $id)->update([
                 'file_no' => $request->file_no,
@@ -177,11 +177,11 @@ class CaseListController extends Controller
                 'end' => $request->end,
                 'dol' => $request->dol,
                 'category' => $request->category,
-                'claim_amount' => $claim_amount
+                // 'claim_amount' => $claim_amount
             ]);
-            Expense::where('file_no_expense', $id)->update([
-                'amount' => $amount
-            ]);
+            // Expense::where('file_no_expense', $id)->update([
+            //     'amount' => $amount
+            // ]);
             MemberInsurance::where('file_no_outstanding', $id)->delete();
             for ($i = 0; $i < count($request->member); $i++) {
                 MemberInsurance::create([

@@ -62,7 +62,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="insured">Insured</label>
             <input type="text" id="insured" value="{{ $caselist->insured }}" name="insured" class="form-control @error('insured') is-invalid @enderror">
@@ -73,7 +73,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="dol">dol</label>
             <input type="date" value="{{ $caselist->dol ?? '' }}" id="dol" name="dol" class="form-control @error('dol') is-invalid @enderror">
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="risk_location">risk location</label>
             <input type="text" id="risk_location" value="{{ $caselist->risk_location }}" name="risk_location" class="form-control @error('risk_location') is-invalid @enderror">
@@ -96,7 +96,8 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+
+    {{--<div class="col-md-3">
         <div class="form-group">
             <label for="claim_amount">claim_amount</label>
             <input type="text" value="@isset($caselist->claim_amount) {{ number_format($caselist->claim_amount) }} @endisset" oninput="rupiah(this)" id="claim_amount" name="claim_amount" class="form-control @error('claim_amount') is-invalid @enderror">
@@ -106,7 +107,7 @@
             </div>
             @enderror
         </div>
-    </div>
+    </div>--}}
 
     <div class="col-md-3">
         <div class="form-group">
@@ -167,7 +168,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="leader">Leader</label>
             <input class="form-control @error('leader') is-invalid @enderror" value="{{ $caselist->leader ?? '' }}" name="leader" id="leader" type="text">
@@ -178,7 +179,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="begin">begin</label>
             <input class="form-control @error('begin') is-invalid @enderror" value="{{ $caselist->begin }}" name="begin" id="begin" type="date">
@@ -189,7 +190,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="end">end</label>
             <input class="form-control @error('end') is-invalid @enderror" value="{{ $caselist->end }}" name="end" id="end" type="date">
@@ -200,7 +201,7 @@
             @enderror
         </div>
     </div>
-    <div class="col-md-3">
+    {{--<div class="col-md-3">
         <div class="form-group">
             <label for="amount">amount</label>
             <input class="form-control @error('amount') is-invalid @enderror" oninput="rupiah(this)" value="@isset($caselist->expense->amount) {{ number_format($caselist->expense->amount) }} @endisset" name="amount" id="amount" type="text">
@@ -210,7 +211,7 @@
             </div>
             @enderror
         </div>
-    </div>
+    </div>--}}
 </div>
 <div class="row">
     <div class="col-md-12">
