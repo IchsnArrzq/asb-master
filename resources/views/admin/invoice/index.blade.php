@@ -175,6 +175,13 @@
             })
     }
     const OnSelect = async function(q) {
+        $('#claim_amount').val('')
+        $('#adjusted').val('')
+        $('#fee_based').val('')
+        $('#expense').val('')
+        $('#share').val('')
+        $('#total').val('')
+        $('#forLoop').html('')
         try {
             let data = await GetResource($(q).val())
             console.log(data)
@@ -201,7 +208,8 @@
                     "</tr>")
             })
         } catch (err) {
-            console.log(err)
+            console.info(err)
+            alert('Data Masih Kosong')
         }
     }
 

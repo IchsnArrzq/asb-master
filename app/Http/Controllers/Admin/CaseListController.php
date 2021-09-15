@@ -65,9 +65,7 @@ class CaseListController extends Controller
             'begin' => 'required',
             'end' => 'required',
             'dol' => 'required',
-            'insured' => 'required',
-            // 'amount' => 'required',
-            // 'claim_amount' => 'required'
+            'insured' => 'required'
         ]);
         // $amount = str_replace(',', '', $request->amount);
         // $claim_amount = str_replace(',', '', $request->claim_amount);
@@ -87,12 +85,7 @@ class CaseListController extends Controller
                 'begin' => $request->begin,
                 'end' => $request->end,
                 'dol' => $request->dol,
-                'category' => $request->category,
-                // 'claim_amount' => $claim_amount
-            ]);
-            Expense::create([
-                'file_no_expense' => $caselist->id,
-                // 'amount' => $amount
+                'category' => $request->category
             ]);
             for ($i = 1; $i <= count($request->member); $i++) {
                 MemberInsurance::create([
@@ -176,12 +169,8 @@ class CaseListController extends Controller
                 'begin' => $request->begin,
                 'end' => $request->end,
                 'dol' => $request->dol,
-                'category' => $request->category,
-                // 'claim_amount' => $claim_amount
+                'category' => $request->category
             ]);
-            // Expense::where('file_no_expense', $id)->update([
-            //     'amount' => $amount
-            // ]);
             MemberInsurance::where('file_no_outstanding', $id)->delete();
             for ($i = 0; $i < count($request->member); $i++) {
                 MemberInsurance::create([
